@@ -1,16 +1,20 @@
 <StackLayout orientation="horizontal">
-  <Label *ngFor="let keyValue of firstRow" [text]="keyValue" textWrap="true" fontSize="36dp" padding="28dp" margin="0dp 16dp"
-    color="white"></Label>
+  <StackLayout *ngFor="let keyValue of firstRow; let i = index" (tap)="onKeyPressed(i, 'firstRow')">
+    <Label [text]="keyValue" textWrap="true" fontSize="36dp" padding="28dp" margin="0dp 16dp" color="white"></Label>
+  </StackLayout>
 </StackLayout>
 <StackLayout orientation="horizontal">
-  <Label *ngFor="let keyValue of secondRow" [text]="keyValue" textWrap="true" fontSize="36dp" padding="28dp" margin="0dp 16dp"
-    color="white"></Label>
+  <StackLayout *ngFor="let keyValue of secondRow; let i = index" (tap)="onKeyPressed(i, 'secondRow')">
+    <Label [text]="keyValue" textWrap="true" fontSize="36dp" padding="28dp" margin="0dp 16dp" color="white"></Label>
+  </StackLayout>
 </StackLayout>
 <StackLayout orientation="horizontal">
-  <Label *ngFor="let keyValue of thirdRow" [text]="keyValue" textWrap="true" fontSize="36dp" padding="28dp" margin="0dp 16dp"
-    color="white"></Label>
+  <StackLayout *ngFor="let keyValue of thirdRow; let i = index" (tap)="onKeyPressed(i, 'thirdRow')">
+    <Label [text]="keyValue" textWrap="true" fontSize="36dp" padding="28dp" margin="0dp 16dp" color="white"></Label>
+  </StackLayout>
 </StackLayout>
 <StackLayout orientation="horizontal">
-  <Label *ngFor="let keyValue of fourthRow" [text]="keyValue" textWrap="true" fontSize="36dp" padding="28dp" margin="0dp 18dp"
-    color="white" textAlignment="Right"></Label>
+  <StackLayout *ngFor="let keyValue of fourthRow; let i = index" (tap)="onKeyPressed(i, 'fourthRow')">
+    <Label [text]="keyValue" textWrap="true" fontSize="36dp" padding="28dp" margin="0dp 18dp" color="white" textAlignment="Right"></Label>
+  </StackLayout>
 </StackLayout>

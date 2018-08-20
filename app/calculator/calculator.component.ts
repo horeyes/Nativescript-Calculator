@@ -9,15 +9,23 @@ import { Component, OnInit } from '@angular/core';
 export class CalculatorComponent implements OnInit {
 
   public value: string = "0"
-  
+
   constructor() { }
 
   ngOnInit() {
     console.log("Component");
-   }
+  }
 
-  changeValue(){
-    this.value = "1";
+  onValueChangeCheck(value: string) {
+    console.log("Changed: " + value);
+  }
+
+  onKeyPressed(keyPressed: string) {
+    if (this.value != "0") {
+      this.value = this.value + keyPressed
+    } else {
+      this.value = keyPressed;
+    }
   }
 
 }

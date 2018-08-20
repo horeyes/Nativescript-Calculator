@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, ChangeDetectorRef } from '@angular/core';
 
 @Component({
   moduleId: module.id,
@@ -6,11 +6,16 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: './calculator-display.component.html',
   styleUrls: ['./calculator-display.component.scss']
 })
-export class CalculatorDisplayComponent implements OnInit {
+export class CalculatorDisplayComponent implements OnInit, OnChanges {
 
   @Input() value: string = "0";
-  constructor() { }
+  @Output() valueCheck: EventEmitter<string> = new EventEmitter<string>();
+  constructor(private _changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit() { }
 
+  ngOnChanges(){
+    this._changeDetectorRef.detectChanges();
+    this.valueCheck.emit(this.value);
+  }
 }
