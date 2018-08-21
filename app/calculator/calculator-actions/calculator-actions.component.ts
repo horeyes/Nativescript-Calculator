@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   moduleId: module.id,
@@ -8,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CalculatorActionsComponent implements OnInit {
 
-  public actions: string[] = ["Del", "/", "*", "-", "+"]
+  public actions: string[] = ["Del", "/", "*", "-", "+"];
+  @Output() actionKeyPressed: EventEmitter<string> = new EventEmitter<string>();
   constructor() { }
 
   ngOnInit() { }
 
+  onActionKeyPressed(index: number) {
+    this.actionKeyPressed.emit(this.actions[index]);
+  }
 }

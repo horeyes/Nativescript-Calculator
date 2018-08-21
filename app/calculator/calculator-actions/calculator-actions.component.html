@@ -1,3 +1,4 @@
 <StackLayout horizontalAlignment="center">
-  <Label *ngFor="let actionKey of actions" [text]="actionKey" textWrap="true" fontSize="24dp" padding="36dp 0dp" color="white"></Label>
+  <Label *ngFor="let actionKey of actions; let i = index" [text]="actionKey" textWrap="true" fontSize="24dp" padding="24.5dp 0dp"
+    color="white" (tap)="onActionKeyPressed(i)"></Label>
 </StackLayout>
