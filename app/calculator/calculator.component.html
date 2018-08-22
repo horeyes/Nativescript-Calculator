@@ -2,7 +2,7 @@
 </ActionBar>
 <GridLayout rows="auto, *" columns="*, 80">
   <StackLayout row="0" colSpan="2" height="40%">
-    <app-calculator-display [value]="value" (valueCheck)="onValueChangeCheck($event)"></app-calculator-display>
+    <app-calculator-display [value]="value" [total]="total" (valueCheck)="onValueChangeCheck($event)"></app-calculator-display>
   </StackLayout>
   <StackLayout row="1" backgroundColor="#1565c0">
     <app-calculator-keypad (keyPressed)="onKeyPressed($event)"></app-calculator-keypad>

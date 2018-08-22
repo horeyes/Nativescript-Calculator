@@ -9,12 +9,13 @@ import { Component, OnInit, Input, Output, EventEmitter, OnChanges, ChangeDetect
 export class CalculatorDisplayComponent implements OnInit, OnChanges {
 
   @Input() value: string = "0";
+  @Input() total: string = "0";
   @Output() valueCheck: EventEmitter<string> = new EventEmitter<string>();
   constructor(private _changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit() { }
 
-  ngOnChanges(){
+  ngOnChanges() {
     this._changeDetectorRef.detectChanges();
     this.valueCheck.emit(this.value);
   }

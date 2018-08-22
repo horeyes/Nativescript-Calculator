@@ -1,3 +1,10 @@
-<TextField [(ngModel)]="value" [text]="value" editable="false" textAlignment="Right" backgroundColor="white" fontSize="64dp" 
-  marginTop="0dp">
-</TextField>
+<GridLayout rows="*, *">
+  <TextField row="0" [(ngModel)]="value" [text]="value" editable="false" textAlignment="Right" backgroundColor="white" fontSize="64dp"
+    marginTop="0dp">
+  </TextField>
+
+  <StackLayout row="1" verticalAlignment="bottom" horizontalAlignment="Right">
+    <Label [text]="'Total: ' + total" fontSize="48dp" textWrap="true" margin="6dp"></Label>
+  </StackLayout>
+
+</GridLayout>

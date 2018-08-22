@@ -1,24 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 
-function splitMulti(str, tokens) {
-  var tempChar = tokens[0]; // We can use the first token as a temporary join character
-  for (var i = 1; i < tokens.length; i++) {
-    str = str.split(tokens[i]).join(tempChar);
-  }
-  str = str.split(tempChar);
-  return str;
-}
 
-
-var splitOrig = String.prototype.split; // Maintain a reference to inbuilt fn
-String.prototype.split = function () {
-  if (arguments[0].length > 0) {
-    if (Object.prototype.toString.call(arguments[0]) == "[object Array]") { // Check if our separator is an array
-      return splitMulti(this, arguments[0]);  // Call splitMulti
-    }
-  }
-  return splitOrig.apply(this, arguments); // Call original split maintaining context
-};
 
 @Component({
   moduleId: module.id,
@@ -29,6 +11,9 @@ String.prototype.split = function () {
 export class CalculatorComponent implements OnInit {
 
   public value: string = "0";
+  public opCounter: number = 0;
+  public storeValue: number = 0;
+  public total: string = "0";
 
   constructor() { }
 
@@ -37,14 +22,12 @@ export class CalculatorComponent implements OnInit {
   }
 
   onValueChangeCheck(value: string) {
-    console.log("Changed: " + value);
   }
 
   onKeyPressed(keyPressed: string) {
 
     switch (keyPressed) {
       case "=":
-        this.calculator();
         break;
 
       default:
@@ -59,12 +42,12 @@ export class CalculatorComponent implements OnInit {
   }
 
   onActionKeyPressed(keyPresed: string) {
-    console.log("Case: " + keyPresed);
-
+    let value = Number(this.value);
     switch (keyPresed) {
       case "Del":
         if (this.value.length <= 1) {
           this.value = "0";
+          this.opCounter = 0;
         }
         else {
           this.value = this.value.slice(0, -1);
@@ -72,26 +55,62 @@ export class CalculatorComponent implements OnInit {
         break
 
       case "/":
-        this.value += "/";
+        this.value = "0";
+        this.operation(value, "/")
+        this.operationCounter();
+
         break;
 
       case "*":
-        this.value += "*";
+        this.value = "0";
+        this.operation(value, "*")
+        this.operationCounter();
         break;
 
       case "-":
-        this.value += "-";
+        this.value = "0";
+        this.operation(value, "-")
+        this.operationCounter();
         break;
 
       case "+":
-        this.value += "+";
+        this.value = "0";
+        this.operation(value, "+")
+        this.operationCounter();
         break;
     };
   }
 
-  calculator() {
-    let n
-    console.log("Includes: " + this.value.includes("/", n))
-    this.value.includes("/");
+  operationCounter() {
+    this.opCounter += 1;
   }
+
+  operation(value, operation) {
+
+    if (this.opCounter >= 1) {
+      let currentValue = Number(this.value);
+      switch (operation) {
+        case "/":
+          this.total = (this.storeValue / value).toString();
+          this.storeValue = Number(this.total);
+          break;
+        case "*":
+          this.total = (this.storeValue * value).toString();
+          this.storeValue = Number(this.total);
+          break;
+        case "-":
+          this.total = (this.storeValue - value).toString();
+          this.storeValue = Number(this.total);
+          break;
+        case "+":
+          this.total = (this.storeValue + value).toString();
+          this.storeValue = Number(this.total);
+          break;
+      }
+    }
+    else {
+      this.storeValue = value;
+    }
+  }
+
 }
